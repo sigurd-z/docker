@@ -2,8 +2,6 @@ FROM sigurdz/centos:v1
 
 MAINTAINER sigurd <z1012726@gmail.com>
 
-VOLUME ["/etc/conf", "/data/www", "/data/logs"]
-
 ADD ./install_nginx.sh /data/
 ADD ./install_php.sh   /data/
 ADD ./init.d/          /data/
@@ -29,6 +27,8 @@ RUN yum clean all
 
 EXPOSE 8080  
 
+VOLUME ["/etc/conf", "/data/www", "/data/logs"]
+
 #CMD ["/usr/local/nginx/sbin/nginx", "-c", "/etc/conf/nginx.conf"]
 CMD ["/opt/bootstrap.sh"]
 
@@ -36,11 +36,11 @@ CMD ["/opt/bootstrap.sh"]
 # docker rm -f webserver
 # docker build -t web_server .
 
-# docker run --name webserver_files web_server /bin/bash 
+# docker run --name sigurdz/webserver_files:v1 web_server /bin/bash 
 
 # 文件系统挂载
-## docker run --name webserver -p 8080:8080 -d -v /Users/sigurd/Project/docker/web_server/www:/data/www web_server
+## docker run --name webserver -p 8080:8080 -d -v /Users/sigurd/Project/docker/web_server/www:/data/www sigurdz/web_server:v1
 # 容器挂载
-## docker run --name webserver -p 8080:8080 -d --volumes-from webserver_files web_server
+## docker run --name webserver -p 8080:8080 -d --volumes-from webserver_files sigurdz/web_server:v1
 # 
 ## docker exec -t -i webserver /bin/bash
