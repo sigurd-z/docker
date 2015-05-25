@@ -1,4 +1,4 @@
-FROM sigurdz/server:v1
+FROM sigurdz/centos:v1
 
 MAINTAINER sigurd <z1012726@gmail.com>
 
