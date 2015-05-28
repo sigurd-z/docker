@@ -37,7 +37,7 @@ RUN wget -c http://nginx.org/download/nginx-1.8.0.tar.gz &&\
     chkconfig --level 2345 nginx on &&\ 
 
     echo "<p>hello</p>" > /data/www/index.html &&\ 
-    echo "<?php \n    phpinfo();" > /data/www/index.php &&\ 
+    echo "<?php \n    phpinfo();" > /data/www/phpinfo.php &&\ 
     echo " " > /data/logs/nginx/access.log &&\ 
     echo " " > /data/logs/nginx/error.log &&\ 
     ln -sf /data/logs/nginx/access.log /dev/stdout  &&\ 
