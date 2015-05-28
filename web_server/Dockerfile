@@ -41,9 +41,9 @@ CMD ["/opt/bootstrap.sh"]
 ## docker run --name webserver_files sigurdz/web_server:v1 /bin/bash 
 
 # 文件系统挂载
-## docker run --name webserver -p 8080:8080 -d -v /Users/sigurd/Project/docker/web_server/www:/data/www sigurdz/web_server:v1
+## docker run --name webserver -p 8080:8080 -d -v /data/www:/data/www -v /data/conf:/etc/conf -v /data/logs:/data/logs sigurdz/web_server:v1
 # 容器挂载
-## docker run --name webserver -p 8080:8080 -d --volumes-from webserver_files -v ~/Project/git:/data/vol sigurdz/web_server:v1
+## docker run --name webserver -p 8080:8080 -d -v /data:/data/tmp --volumes-from webserver_files -v ~/Project/git:/data/vol sigurdz/web_server:v1
 # 
-## docker exec -t -i webserver  /bin/bash
+## docker exec -t -i webserver /bin/bash
 # rsync -avPh
