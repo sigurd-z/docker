@@ -15,7 +15,7 @@ RUN mkdir -p /data/tgz &&\
 
 #RUN /usr/sbin/groupadd nginx &&\ 
 #    /usr/sbin/useradd -g nginx nginx &&\ 
-
+#
 #    chown -R nginx:nginx /data/www &&\ 
 #    chown -R nginx:nginx /data/logs &&\ 
 #    chmod -R 755 /data/www &&\ 
@@ -24,7 +24,6 @@ RUN mkdir -p /data/tgz &&\
 RUN yum install -y mysql  
 
 # nginx
-
 RUN wget -c http://nginx.org/download/nginx-1.8.0.tar.gz &&\ 
     tar zxvf nginx-1.8.0.tar.gz &&\ 
     cd nginx-1.8.0 &&\ 
@@ -59,7 +58,6 @@ RUN wget -c --content-disposition "http://downloads.sourceforge.net/mcrypt/libmc
     echo "/usr/lib/lib" >> /etc/ld.so.conf &&\ 
     ldconfig &&\ 
 
-# php
     wget -c --content-disposition http://cn2.php.net/get/php-5.6.4.tar.gz/from/this/mirror &&\ 
     tar zxvf php-5.6.4.tar.gz &&\ 
     cd php-5.6.4/ &&\ 
@@ -77,9 +75,6 @@ RUN wget -c --content-disposition "http://downloads.sourceforge.net/mcrypt/libmc
     make && make install &&\
     cd ../ &&\ 
 
-#    echo "extension_dir=\"/usr/local/php/lib/php/extensions/no-debug-zts-20131226/\"" >> /etc/conf/php.ini &&\ 
-#    echo "extension=memcache.so" >> /etc/conf/php.ini &&\ 
-
     mv /data/php-fpm /etc/init.d/php-fpm &&\ 
     chown root:root /etc/init.d/php-fpm &&\ 
     chmod +x /etc/init.d/php-fpm &&\ 
@@ -89,6 +84,7 @@ RUN wget -c --content-disposition "http://downloads.sourceforge.net/mcrypt/libmc
     yum clean all &&\ 
     rm -f /data/install_nginx.sh /data/install_php.sh
 
+# start server
 RUN /etc/init.d/nginx start &&\ 
     /etc/init.d/php-fpm start
 
@@ -109,6 +105,7 @@ CMD ["/opt/bootstrap.sh"]
 
 # 文件系统挂载
 ## docker run --name webserver -p 8080:8080 -d -v {BuildDir}/www:/data/www -v {BuildDir}/conf:/etc/conf -v {BuildDir}/logs:/data/logs sigurdz/web_server:v1
+## docker run --name webserver -p 8080:8080 -d -v ~/Project/www:/data/www -v ~/Project/logs:/data/logs sigurdz/web_server:v1
 # 容器挂载
 ## docker run --name webserver -p 8080:8080 -d -v {BuildDir}:/data/tmp --volumes-from webserver_files -v ~/Project/git:/data/vol sigurdz/web_server:v1
 # 
