@@ -12,18 +12,19 @@ ADD ./bootstrap.sh     /opt/
 
 RUN mkdir -p /data/logs/nginx
 
-RUN /usr/sbin/groupadd nginx
-RUN /usr/sbin/useradd -g nginx nginx
+#RUN /usr/sbin/groupadd nginx
+#RUN /usr/sbin/useradd -g nginx nginx
 
-RUN chown -R nginx:nginx /data/www
+#RUN chown -R nginx:nginx /data/www
 #RUN chown -R nginx:nginx /data/logs
-RUN chmod -R 755 /data/www
-RUN chmod -R 777 /data/logs
+#RUN chmod -R 755 /data/www
+#RUN chmod -R 777 /data/logs
 
 RUN bash /data/install_nginx.sh
 RUN bash /data/install_php.sh
 
 RUN yum clean all
+RUN rm -f /data/install_nginx.sh /data/install_php.sh
 
 EXPOSE 8080  
 
