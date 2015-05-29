@@ -19,4 +19,4 @@ CMD ["/usr/bin/mysqld_safe"]
 # docker rmi -f mysql_server
 # docker rm -f mysqlserver
 # docker build -t mysql_server .
-# docker run --name=mysqlserver -d -p 3306:3306 mysql_server
+# docker run --name=mysqlserver -d -p 3306:3306 sigurdz/mysql:v1

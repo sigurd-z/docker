@@ -37,7 +37,7 @@ RUN wget -c http://nginx.org/download/nginx-1.8.0.tar.gz &&\
     chkconfig --level 2345 nginx on &&\ 
 
     echo "<p>hello</p>" > /data/www/index.html &&\ 
-    echo "<?php \n    phpinfo();" > /data/www/phpinfo.php &&\ 
+    echo "<?php phpinfo();" > /data/www/phpinfo.php &&\ 
     echo " " > /data/logs/nginx/access.log &&\ 
     echo " " > /data/logs/nginx/error.log &&\ 
     ln -sf /data/logs/nginx/access.log /dev/stdout  &&\ 
@@ -101,13 +101,14 @@ CMD ["/opt/bootstrap.sh"]
 # docker build -t web_server .
 
 # 创建容器
-## docker run --name webserver_files sigurdz/web_server:v1 /bin/bash 
+## docker run --name webserver_files sigurdz/web:v1 /bin/bash 
 
 # 文件系统挂载
-## docker run --name webserver -p 8080:8080 -d -v {BuildDir}/www:/data/www -v {BuildDir}/conf:/etc/conf -v {BuildDir}/logs:/data/logs sigurdz/web_server:v1
-## docker run --name webserver -p 8080:8080 -d -v ~/Project/www:/data/www -v ~/Project/logs:/data/logs sigurdz/web_server:v1
+## docker run --name webserver -p 8080:8080 -d -v {BuildDir}/www:/data/www -v {BuildDir}/conf:/etc/conf -v {BuildDir}/logs:/data/logs sigurdz/web:v1
+## docker run --name webserver -p 8080:8080 -d -v /data/www:/data/www -v /data/logs:/data/logs sigurdz/web:v1
+## docker run --name webserver -p 8080:8080 -d -v ~/Project/www:/data/www -v ~/Project/logs:/data/logs sigurdz/web:v1
 # 容器挂载
-## docker run --name webserver -p 8080:8080 -d -v {BuildDir}:/data/tmp --volumes-from webserver_files -v ~/Project/git:/data/vol sigurdz/web_server:v1
+## docker run --name webserver -p 8080:8080 -d -v {BuildDir}:/data/tmp --volumes-from webserver_files -v ~/Project/git:/data/vol sigurdz/web:v1
 # 
 ## docker exec -t -i webserver /bin/bash
 # rsync -avPh
