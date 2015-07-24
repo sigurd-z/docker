@@ -104,9 +104,9 @@ CMD ["/opt/bootstrap.sh"]
 ## docker run --name webserver_files sigurdz/web:v1 /bin/bash 
 
 # 文件系统挂载
-## docker run --name webserver -p 8080:8080 -d -v {BuildDir}/www:/data/www -v {BuildDir}/conf:/etc/conf -v {BuildDir}/logs:/data/logs sigurdz/web:v1
-## docker run --name webserver -p 8080:8080 -d -v /data/www:/data/www -v /data/logs:/data/logs sigurdz/web:v1
-## docker run --name webserver -p 8080:8080 -d -v ~/Project/www:/data/www -v ~/Project/logs:/data/logs sigurdz/web:v1
+## docker run --name webserver -p 8080:8080 -d --link mysqlserver:mysqlserver -v {BuildDir}/www:/data/www -v {BuildDir}/conf:/etc/conf -v {BuildDir}/logs:/data/logs sigurdz/web:v1
+## docker run --name webserver -p 8080:8080 -d --link mysqlserver:mysqlserver -v /data/www:/data/www -v /data/logs:/data/logs sigurdz/web:v1
+## docker run --name webserver -p 8080:8080 -d --link mysqlserver:mysqlserver -v ~/Project/www:/data/www -v ~/Project/logs:/data/logs sigurdz/web:v1
 # 容器挂载
 ## docker run --name webserver -p 8080:8080 -d -v {BuildDir}:/data/tmp --volumes-from webserver_files -v ~/Project/git:/data/vol sigurdz/web:v1
 # 
